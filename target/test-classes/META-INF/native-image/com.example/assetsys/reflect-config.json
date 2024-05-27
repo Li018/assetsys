@@ -1,0 +1,10 @@
+[
+  {
+    "name": "org.springframework.test.context.aot.AotTestContextInitializers__Generated",
+    "allPublicMethods": true
+  },
+  {
+    "name": "org.springframework.test.context.aot.AotTestAttributes__Generated",
+    "allPublicMethods": true
+  }
+]

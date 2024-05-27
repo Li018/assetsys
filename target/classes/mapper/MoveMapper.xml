@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.assetsys.mapper.MoveMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.assetsys.entity.Move">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="tester" property="tester" />
+        <result column="attacktime" property="attacktime" />
+        <result column="targetip" property="targetip" />
+        <result column="exploitvuls" property="exploitvuls" />
+        <result column="movepath" property="movepath" />
+        <result column="moveresult" property="moveresult" />
+        <result column="movetime" property="movetime" />
+    </resultMap>
+
+</mapper>

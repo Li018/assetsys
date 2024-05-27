@@ -1,0 +1,54 @@
+[
+  {
+    "path": "/system",
+    "name": "system",
+    "meta": {
+      "icon": "Histogram",
+      "title": "系统管理",
+      "hidden": false
+    },
+    "children": [
+      {
+        "path": "/system/user",
+        "name": "system/user",
+        "component": "/user/index",
+        "meta": {
+          "icon": "Histogram",
+          "title": "用户管理",
+          "hidden": false
+        }
+      },
+      {
+        "path": "/system/role",
+        "name": "system/role",
+        "component": "/role/index",
+        "meta": {
+          "icon": "Histogram",
+          "title": "角色管理",
+          "hidden": false
+        }
+      },
+
+      {
+        "path": "/system/permission",
+        "name": "system/permission",
+        "component": "/permission/index",
+        "meta": {
+          "icon": "Histogram",
+          "title": "权限管理",
+          "hidden": false
+        }
+      }
+    ]
+  },
+  {
+    "path": "/log",
+    "name": "log",
+    "component": "/log/index",
+    "meta": {
+      "icon": "Histogram",
+      "title": "系统日志",
+      "hidden": false
+    }
+  }
+]

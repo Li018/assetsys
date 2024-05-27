@@ -1,0 +1,592 @@
+<script setup name="user">
+  import {reactive, ref} from 'vue'
+  import {
+    CircleCloseFilled,
+    Delete,
+    Download,
+    Edit,
+    InfoFilled,
+    Plus,
+    Refresh,
+    Search,
+    Upload
+  } from '@element-plus/icons-vue'
+  import request from '@/utils/request'
+  import {ElMessage, ElMessageBox} from 'element-plus'
+
+  import downloadExcel from '@/utils/downloads'
+  import {MdEditor} from 'md-editor-v3';
+  import 'md-editor-v3/lib/style.css';
+  // 名称
+  const name = ref('')
+  // 弹框头部名称
+  const headerTitle = ref()
+  // 当前页数
+  const pageNum = ref(1)
+  // 每页展示量
+  const pageSize = ref(10)
+  // 分页数据总数
+  const total = ref(0)
+  // 表格数据
+  const tableData = ref([])
+  // 批量选择的数组
+  const multipleSelection = ref([])
+  // 是否禁用按钮
+  const disabled = ref(true)
+  // 是否展示弹框
+  const dialogVisible = ref(false)
+
+
+
+
+
+
+
+  // 表单数据定义
+  const form = reactive({
+  #foreach($item in $tableColumns)
+    #if($item.defaultValue)
+    $item.name:$item.defaultValue,
+    #else
+    $item.name:undefined,
+    #end
+  #end
+  })
+
+  // 表单样式
+  const formSize = ref('default')
+  // 表单ref标识数据
+  const ruleFormRef = ref()
+  // 自定义校验规则
+
+  // 表单校验规则
+  const rules = reactive({
+
+  #foreach($item in $tableColumns)
+    #if($item.isRequire==true)
+    #if($item.formComponent=="input")
+    $item.name:[{required: true, message: '必选项不能为空', trigger: 'blur'}],
+    #elseif($item.formComponent=="phone")
+    $item.name:[
+        { required: true, message: '请输入手机号码', trigger: 'blur' },
+        {
+          pattern: /^1[3456789]\d{9}$/,
+          message: '手机号格式不正确',
+          trigger: 'blur',
+        },
+      ],
+    #elseif($item.formComponent=="email")
+    $item.name:
+              [
+                { required: true, message: '请输入邮箱号', trigger: 'blur' },
+                {
+                  type: 'email',
+                  message: '邮箱地址格式不正确',
+                  trigger: ['blur'],
+                },
+              ],
+    #else
+    $item.name:[{required: true, message: '必选项不能为空', trigger: 'change'}],
+    #end
+    #end
+  #end
+  })
+
+  //新增方法
+  const handleAdd = async () => {
+    headerTitle.value = reactive('新增数据')
+    dialogVisible.value = true
+  }
+  // 修改方法
+  const handleUpdate = async (id) => {
+    dialogVisible.value = true
+    headerTitle.value = reactive('编辑数据')
+    const res = await request.get(`/$tableName/#[[${id}]]#`)
+    Object.assign(form, res.data)
+  }
+  // 单个删除方法
+  const handleDel = async (id) => {
+    await request.delete(`/$tableName/#[[${id}]]#`)
+    ElMessage({
+      showClose: true,
+      message: '删除成功',
+      type: 'success'
+    })
+    await load()
+  }
+  // 批量删除方法
+  const handleBatchDel = async () => {
+    const ids = []
+    multipleSelection.value.forEach((row) => {
+      ids.push(row.id)
+    })
+    await request.delete(`/$tableName/batch/#[[${ids}]]#`)
+    ElMessage({
+      showClose: true,
+      message: '批量删除成功',
+      type: 'success'
+    })
+    await load()
+  }
+
+  // 分页查询方法（初始化方法，页面加载成功以后就调用的方法）
+  const load = async () => {
+    const res = await request.get('/$tableName/page', {
+      params: {
+        name: name.value,
+        pageNum: pageNum.value,
+        pageSize: pageSize.value
+      }
+    })
+    pageNum.value = res.data.current
+    pageSize.value = res.data.size
+    total.value = res.data.total
+    tableData.value = res.data.records
+  }
+  // 加载页面初始化调用load方法
+  load()
+
+  // 清空查询数据重置方法
+  const handleReset = () => {
+    name.value = ''
+    load()
+  }
+  // 修改每页展示的数据量方法
+  const handleSizeChange = (size) => {
+    pageSize.value = size
+    load()
+  }
+  // 翻页方法
+  const handleCurrentChange = (current) => {
+    pageNum.value = current
+    load()
+  }
+  // 多选按钮处理方法
+  const handleSelectionChange = (val) => {
+    multipleSelection.value = val
+    disabled.value = val.length === 0
+  }
+
+  // 关闭弹框提示方法
+  const handleClose = (done) => {
+    ElMessageBox.confirm('确定关闭窗口?')
+            .then(() => {
+              handleResetForm(ruleFormRef.value)
+            })
+            .then(() => {
+              done()
+            })
+            .catch(() => {
+              // catch error
+            })
+  }
+  // 提交表单校验方法
+  const handleSubmitForm = async (formEl) => {
+    if (!formEl) return
+    await formEl.validate(async (valid, fields) => {
+      if (valid) {
+        await request({
+          method: form.id ? 'put' : 'post',
+          url: form.id ? `/$tableName/#[[${form.id}]]#` : '/$tableName',
+          data: form
+        })
+        ElMessage({
+          showClose: true,
+          message: '操作成功',
+          type: 'success'
+        })
+        await handleResetForm(formEl)
+      } else {
+        console.log('error submit!', fields)
+      }
+    })
+  }
+  // 批量导入读数据写到后端数据库中
+  const beforeBatchUpload = async (file) => {
+    let fd = new FormData()
+    fd.append('file', file)
+    await request.post('/$tableName/batch/upload', fd, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    ElMessage({
+      showClose: true,
+      message: '上传成功',
+      type: 'success'
+    })
+    await load()
+  }
+  // 批量导出方法
+  const handleBatchExport = async () => {
+    const ids = multipleSelection.value.map((row) => row.id)
+    const res = await request(
+            {
+              url: `/$tableName/batch/export/#[[${ids}]]#`,
+              method: 'get',
+              responseType: 'blob'
+            } //在请求中加上这一行，特别重要
+    )
+    downloadExcel(res, '导出数据表')
+  }
+  // 取消弹框方法
+  const handleResetForm = async (formEl) => {
+    if (!formEl) return
+    formEl.resetFields()
+    Object.assign(form,
+            {
+              id:undefined,
+              name:undefined,
+              phone:undefined,
+              email:undefined,}
+
+    )
+    // formEl.clearValidate("img")
+    dialogVisible.value = false
+    await load()
+  }
+
+  // 文件上传方法
+  #foreach($item in $tableColumns)
+  #if($item.formComponent=="img"||$item.formComponent=="file")
+   const upload$item.name=async (file)=>{
+     let fd = new FormData()
+     fd.append('file', file)
+     const res = await request.post('/file/upload', fd, {
+       headers: {
+         'Content-Type': 'multipart/form-data'
+       }
+     })
+     ElMessage({
+       showClose: true,
+       message: '上传成功',
+       type: 'success'
+     })
+     form.$item.name = res.data
+     ruleFormRef.value.clearValidate('$item.name')
+   }
+  #end
+  #end
+
+
+  // 文件下载
+  const dowload = async (url) => {
+    window.open(url)
+  }
+  // 富文本文件上传
+  const onUploadImg = async (files, callback) => {
+    let i = 0;
+    const res = await Promise.all(
+            files.map((file) => {
+
+              if (i > 0) {
+
+                return false
+              }
+              return new Promise((rev, rej) => {
+                const formdata = new FormData();
+                formdata.append('file', file);
+
+                request
+                        .post('/file/upload', formdata, {
+                          headers: {
+                            'Content-Type': 'multipart/form-data',
+                          }
+                        })
+                        .then((res) => {
+                          i++
+                          rev(res.data)
+                        })
+                        .catch((error) => rej(error));
+              });
+
+            })
+    );
+    callback(res);
+  };
+
+</script>
+<template>
+  <!--  编辑弹框-->
+  <el-dialog
+          :modelValue="dialogVisible"
+
+          :show-close="false"
+          :before-close="handleClose"
+          width=$width
+
+
+  >
+    <template #header="{ close, titleId, titleClass }">
+      <div class="my-header">
+        <h4 :id="titleId" :class="titleClass">{{ headerTitle }}</h4>
+        <el-button type="danger" plain size="small" :icon="CircleCloseFilled" @click="handleClose">
+          关闭弹框
+        </el-button>
+      </div>
+    </template>
+    <el-form
+            ref="ruleFormRef"
+            :model="form"
+            :rules="rules"
+            label-width="120px"
+            class="ruleForm"
+            :size="formSize"
+            status-icon
+    >
+
+      #foreach($item in $tableColumns)
+      #if($item.name!="id")
+      #if($item.formComponent=="img"||$item.formComponent=="file")
+      <el-form-item label="$item.description" prop="$item.name">
+        <el-upload action="" :before-upload="upload$item.name" :show-file-list="true">
+          <el-button type="primary" size="small">点击上传</el-button>
+        </el-upload>
+      </el-form-item>
+
+      #elseif($item.formComponent=="date")
+      <el-form-item label="$item.description" prop="$item.name">
+        <el-date-picker
+                v-model="form.$item.name"
+                type="date"
+                value-format="YYYY-MM-DD"
+                placeholder="请选择日期"
+                size="default"
+        />
+      </el-form-item>
+      #elseif($item.formComponent=="time")
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-date-picker
+                  v-model="form.$item.name"
+                  type="datetime"
+                  format="YYYY-MM-DD HH:mm:ss"
+                  value-format="YYYY-MM-DD HH:mm:ss"
+                  placeholder="请选择时间"
+          />
+        </el-form-item>
+      #elseif($item.formComponent=="input")
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-input v-model="form.$item.name"/>
+        </el-form-item>
+      #elseif($item.formComponent=="phone")
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-input v-model="form.$item.name"/>
+        </el-form-item>
+      #elseif($item.formComponent=="email")
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-input v-model="form.$item.name"/>
+        </el-form-item>
+      #elseif($item.formComponent=="textarea")
+        <el-form-item label="$item.description" prop="$item.name">
+          <MdEditor v-model="form.$item.name" @onUploadImg="onUploadImg"/>
+        </el-form-item>
+      #elseif($item.formComponent=='slider')
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-slider v-model="form.$item.name"/>
+        </el-form-item>
+      #elseif($item.formComponent=='rate')
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-rate v-model="form.$item.name"/>
+        </el-form-item>
+      #elseif($item.formComponent=='number')
+        <el-form-item label="$item.description" prop="$item.name">
+          <el-input-number v-model="form.$item.name"/>
+        </el-form-item>
+      #end
+      #end
+      #end
+
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="handleResetForm(ruleFormRef)">取消</el-button>
+        <el-button type="primary" @click="handleSubmitForm(ruleFormRef)"> 提交 </el-button>
+      </span>
+    </template>
+  </el-dialog>
+
+  <el-row>
+    <!--  分页查询表单按钮-->
+    <el-col>
+      <el-form :inline="true">
+        <!--        查询输入框-->
+        <el-form-item>
+          <el-input v-model="name" placeholder="点击输入名称"></el-input>
+        </el-form-item>
+        <!--        查询按钮 and 重置按钮-->
+        <el-form-item>
+          <el-button type="primary" :icon="Search" @click="load">查询</el-button>
+          <el-button type="warning" :icon="Refresh" @click="handleReset">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+    <!-- 新增和批量按钮 -->
+    <el-col style="margin-bottom: 10px; display: flex; gap: 10px">
+      <!--   新增   -->
+      <div v-permission="'sys:$tableName:add'">
+        <el-button type="primary" :icon="Plus" @click="handleAdd" size="small" plain
+        >新增
+        </el-button>
+      </div>
+      <!--   批量导入   -->
+      <div v-permission="'sys:$tableName:batch:export'">
+        <el-upload action="" :before-upload="beforeBatchUpload" :show-file-list="true">
+          <el-button type="success" :icon="Upload" size="small" plain>批量导入</el-button>
+        </el-upload>
+      </div>
+      <!--   批量删除   -->
+      <div v-permission="'sys:$tableName:batch:delete'">
+        <el-popconfirm
+                confirm-button-text="确定"
+                cancel-button-text="取消"
+                :icon="InfoFilled"
+                icon-color="#626AEF"
+                title="确认要批量删除吗？"
+                @confirm="handleBatchDel"
+                @cancel="load"
+        >
+          <template #reference>
+            <el-button type="danger" :disabled="disabled" :icon="Delete" size="small" plain
+            >批量删除
+            </el-button>
+          </template>
+        </el-popconfirm>
+      </div>
+
+      <div v-permission="'sys:$tableName:batch:export'">
+        <el-button
+                type="warning"
+                :icon="Download"
+                :disabled="disabled"
+                size="small"
+                @click="handleBatchExport"
+                plain
+        >批量导出
+        </el-button>
+      </div>
+    </el-col>
+    <!--  表格页面-->
+    <el-col>
+      <el-table
+              :data="tableData"
+              style="width: 100%"
+              :header-cell-style="{ background: '#eef1f6', color: '#606266' }"
+              @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55"/>
+        #foreach($item in $tableColumns)
+        #if($item.name=="id")
+        <el-table-column prop="id" label="ID" align="center"/>
+        #elseif($item.formComponent=="img")
+        <el-table-column prop="$item.name" label="$item.description" align="center">
+          <template #default="scope">
+            <el-image
+                    style="width: 100px; height: 100px"
+                    :src="scope.row.$item.name"
+                    :preview-src-list="[scope.row.$item.name]"
+                    :zoom-rate="1.2"
+                    :max-scale="7"
+                    :preview-teleported="true"
+                    :min-scale="0.2"
+                    :initial-index="0"
+                    fit="contain"
+            />
+          </template>
+        </el-table-column>
+        #elseif($item.formComponent=="file")
+        <el-table-column prop="$item.name" label="$item.description"  align="center">
+          <template #default="scope">
+            <el-button class="ml-2" type="success" @click="dowload(scope.row.$item.name)">下载</el-button>
+          </template>
+        </el-table-column>
+        #elseif($item.formComponent=="textarea")
+        #elseif($item.formComponent=="rate")
+        <el-table-column prop="$item.name" label="$item.description"  align="center">
+        <template #default="scope">
+          <el-rate v-model="scope.row.$item.name" disabled />
+        </template>
+        </el-table-column>
+        #elseif($item.formComponent=="slider")
+          <el-table-column prop="$item.name" label="$item.description"  align="center">
+            <template #default="scope">
+              <el-slider v-model="scope.row.$item.name" disabled />
+            </template>
+          </el-table-column>
+        #else
+        <el-table-column prop="$item.name" label="$item.description"  align="center"/>
+        #end
+        #end
+
+        <el-table-column label="操作" align="center">
+          <template #default="scope">
+            <div style="display: flex; justify-content: center; gap: 10px">
+              <div>
+                <el-button
+                        type="primary"
+                        :icon="Edit"
+                        size="small"
+                        @click="handleUpdate(scope.row.id)"
+                        v-permission="'sys:$tableName:update'"
+                >编辑
+                </el-button>
+              </div>
+              <div v-permission="'sys:$tableName:delete'">
+                <el-popconfirm
+                        confirm-button-text="确定"
+                        cancel-button-text="取消"
+                        :icon="InfoFilled"
+                        icon-color="#626AEF"
+                        title="确认要删除吗？"
+                        @confirm="handleDel(scope.row.id)"
+                        @cancel="load"
+                >
+                  <template #reference>
+                    <el-button type="danger" :icon="Delete" size="small">删除</el-button>
+                  </template>
+                </el-popconfirm>
+              </div>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--      分页按钮-->
+      <div class="pagination">
+        <el-pagination
+                :current-page="pageNum"
+                :page-size="pageSize"
+                :page-sizes="[10, 20, 30, 50, 100, 500, 1000]"
+                small="small"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="Number(total)"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+        />
+      </div>
+    </el-col>
+  </el-row>
+</template>
+
+<style scoped lang="scss">
+  .el-form--inline .el-form-item {
+    margin-right: 10px;
+  }
+
+  .form_header {
+    background-color: #666666;
+  }
+
+  .pagination {
+    margin-top: 10px;
+  }
+
+  .el-button {
+    height: 28px;
+    border-radius: 3px;
+  }
+
+  .my-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+</style>

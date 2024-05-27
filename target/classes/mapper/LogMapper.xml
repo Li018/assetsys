@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.assetsys.mapper.LogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.assetsys.entity.Log">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="operation" property="operation" />
+        <result column="method" property="method" />
+        <result column="params" property="params" />
+        <result column="create_time" property="createTime" />
+        <result column="ip" property="ip" />
+        <result column="result" property="result" />
+        <result column="taketime" property="taketime" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="96663cad-cdbe-4687-be70-712b6eb22c3d" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="spring-beans.schema" />
+        <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Vue Composition API Component" />
+        <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/springboot3/common/Result.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/springboot3/service/impl/UserServiceImpl.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../Coding Software/apache-maven-3.9.4-bin/apache-maven-3.9.4" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="enabledProfiles">
+      <list>
+        <option value="native" />
+        <option value="nativeTest" />
+      </list>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2VyXW9NiGe52EJEHKFoAZ14ai2u" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/assetsys&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\123\\Desktop\\project\\authority-v3.0.2\\authority\\app_ui\\node_modules\\prettier&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.alibabacloud.intellij.config.RootConfigurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;873e9c0b50183b613336eea1020f4369&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding Software\\IntelliJ IDEA 2023.2.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
+    ]
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\123\Desktop\project\authority-v3.0.6\authority\app_ui\src\assets" />
+      <recent name="C:\代码文件夹\项目文件\20231121_authority-v3.0.0\authority\src\main\java\com\example\authority\entity" />
+      <recent name="C:\代码文件夹\学习文件\authority\src\main\resources\mapper" />
+      <recent name="C:\代码文件夹\学习文件\authority\src\main\java\com\example\authority" />
+      <recent name="C:\代码文件夹\学习文件\springboot3" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\123\Desktop\project\authority-v3.0.6\authority\app_ui\public" />
+      <recent name="C:\代码文件夹\学习文件\authority\app_ui\src\views\login" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.authority.controller" />
+      <recent name="com.example.authority.entity" />
+      <recent name="com.example.authority.mapper" />
+      <recent name="com.example.authority.service.impl" />
+      <recent name="com.example.authority.service" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="assetsysApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="assetsys" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.assetsys.assetsysApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.assetsys.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.assetsysApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="96663cad-cdbe-4687-be70-712b6eb22c3d" name="更改" comment="" />
+      <created>1695809324350</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695809324350</updated>
+      <workItem from="1695809325449" duration="13887000" />
+      <workItem from="1695875262153" duration="635000" />
+      <workItem from="1696000004137" duration="138000" />
+      <workItem from="1696084311580" duration="1174000" />
+      <workItem from="1696086568361" duration="2643000" />
+      <workItem from="1696134329979" duration="4644000" />
+      <workItem from="1696166113893" duration="6890000" />
+      <workItem from="1696220567367" duration="25203000" />
+      <workItem from="1696329468562" duration="12169000" />
+      <workItem from="1696481445904" duration="2715000" />
+      <workItem from="1696488200145" duration="14841000" />
+      <workItem from="1696511892101" duration="4692000" />
+      <workItem from="1696516672698" duration="114000" />
+      <workItem from="1696516835503" duration="385000" />
+      <workItem from="1696589898931" duration="15434000" />
+      <workItem from="1696681633610" duration="13661000" />
+      <workItem from="1696764239577" duration="5684000" />
+      <workItem from="1696850559407" duration="11816000" />
+      <workItem from="1696999338360" duration="3915000" />
+      <workItem from="1697014247802" duration="6464000" />
+      <workItem from="1697083432685" duration="5940000" />
+      <workItem from="1697284552471" duration="11914000" />
+      <workItem from="1697298624175" duration="1802000" />
+      <workItem from="1697341810205" duration="1867000" />
+      <workItem from="1697344147714" duration="4848000" />
+      <workItem from="1697429488803" duration="5512000" />
+      <workItem from="1697603080744" duration="4329000" />
+      <workItem from="1697626466103" duration="609000" />
+      <workItem from="1697627898631" duration="8485000" />
+      <workItem from="1697776655804" duration="5204000" />
+      <workItem from="1698054740765" duration="12946000" />
+      <workItem from="1698137595003" duration="11392000" />
+      <workItem from="1698317786580" duration="1000" />
+      <workItem from="1699082524216" duration="1848000" />
+      <workItem from="1699104880344" duration="1511000" />
+      <workItem from="1699173283570" duration="11596000" />
+      <workItem from="1699503822900" duration="596000" />
+      <workItem from="1699609850394" duration="753000" />
+      <workItem from="1699762950774" duration="2000" />
+      <workItem from="1699768052216" duration="2053000" />
+      <workItem from="1699781308635" duration="6704000" />
+      <workItem from="1699968631609" duration="385000" />
+      <workItem from="1700129617876" duration="21651000" />
+      <workItem from="1700210379235" duration="5259000" />
+      <workItem from="1700232233531" duration="6128000" />
+      <workItem from="1700474541797" duration="12397000" />
+      <workItem from="1700562998096" duration="6302000" />
+      <workItem from="1700574097285" duration="4210000" />
+      <workItem from="1700645789264" duration="39000" />
+      <workItem from="1700653638973" duration="1404000" />
+      <workItem from="1700991783835" duration="1636000" />
+      <workItem from="1700994069213" duration="29000" />
+      <workItem from="1701078962558" duration="637000" />
+      <workItem from="1701080770421" duration="42000" />
+      <workItem from="1701338033198" duration="810000" />
+      <workItem from="1701498796862" duration="14000" />
+      <workItem from="1701498818645" duration="618000" />
+      <workItem from="1701500134018" duration="2000" />
+      <workItem from="1701516345890" duration="493000" />
+      <workItem from="1701579205404" duration="3518000" />
+      <workItem from="1701590450020" duration="3679000" />
+      <workItem from="1701598780267" duration="1267000" />
+      <workItem from="1701697949536" duration="2322000" />
+      <workItem from="1701700980810" duration="655000" />
+      <workItem from="1701701680581" duration="43000" />
+      <workItem from="1701706060443" duration="351000" />
+      <workItem from="1701772389202" duration="36000" />
+      <workItem from="1702552051812" duration="209000" />
+      <workItem from="1702948946331" duration="11548000" />
+      <workItem from="1703126872583" duration="6063000" />
+      <workItem from="1703470482030" duration="23000" />
+      <workItem from="1703557670752" duration="12943000" />
+      <workItem from="1703639208115" duration="219000" />
+      <workItem from="1703733060152" duration="460000" />
+      <workItem from="1703733603604" duration="1617000" />
+      <workItem from="1703735651577" duration="8520000" />
+      <workItem from="1704384799779" duration="5773000" />
+      <workItem from="1704426699879" duration="13858000" />
+      <workItem from="1704453237539" duration="104212000" />
+      <workItem from="1705018919577" duration="14449000" />
+      <workItem from="1705065470995" duration="3187000" />
+      <workItem from="1705071530484" duration="2255000" />
+      <workItem from="1705074421921" duration="1798000" />
+      <workItem from="1705076325814" duration="21355000" />
+      <workItem from="1705156119704" duration="2565000" />
+      <workItem from="1705680440072" duration="3678000" />
+      <workItem from="1712746728013" duration="56000" />
+    </task>
+    <task id="LOCAL-00001" summary="添加忽略文件配置">
+      <option name="closed" value="true" />
+      <created>1700576564871</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700576564871</updated>
+    </task>
+    <task id="LOCAL-00002" summary="修改邮件工具包">
+      <option name="closed" value="true" />
+      <created>1700991851296</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700991851296</updated>
+    </task>
+    <task id="LOCAL-00003" summary="编译数据库文档工具包">
+      <option name="closed" value="true" />
+      <created>1700993618202</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700993618202</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="添加忽略文件配置" />
+    <MESSAGE value="修改邮件工具包" />
+    <MESSAGE value="编译数据库文档工具包" />
+    <option name="LAST_COMMIT_MESSAGE" value="编译数据库文档工具包" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

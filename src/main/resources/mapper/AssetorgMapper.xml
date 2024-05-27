@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.assetsys.mapper.AssetorgMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.assetsys.entity.Assetorg">
+        <id column="id" property="id" />
+        <result column="orgname" property="orgname" />
+        <result column="fatherorg" property="fatherorg" />
+    </resultMap>
+<!--    查询儿子辈-->
+    <select id="selectDescendantsByFatherOrg" resultMap="BaseResultMap" parameterType="String">
+        SELECT * FROM sys_assetorg WHERE fatherorg = #{fatherOrg}
+    </select>
+
+    <!-- 查询所有的子辈 -->
+    <select id="selectAllDescendantsByFatherOrg" resultMap="BaseResultMap" parameterType="String">
+        WITH RECURSIVE cte AS (
+        SELECT * FROM sys_assetorg WHERE fatherorg = #{fatherOrg}
+        UNION ALL
+        SELECT a.* FROM sys_assetorg a INNER JOIN cte c ON a.fatherorg = c.orgname
+        )
+        SELECT * FROM cte
+    </select>
+<!--    通过id查询到所有的子辈-->
+    <select id="selectDescendantsById" resultMap="BaseResultMap" parameterType="String">
+        WITH RECURSIVE cte AS (
+        SELECT * FROM sys_assetorg WHERE id = #{id}
+        UNION ALL
+        SELECT a.* FROM sys_assetorg a INNER JOIN cte c ON a.fatherorg = c.orgname
+        )
+        SELECT * FROM cte
+    </select>
+
+</mapper>

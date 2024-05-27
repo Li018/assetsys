@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.assetsys.mapper.AssetMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.assetsys.entity.Asset">
+        <id column="id" property="id" />
+        <result column="assetno" property="assetno" />
+        <result column="assettypeno" property="assettypeno" />
+        <result column="assetname" property="assetname" />
+        <result column="assetlabel" property="assetlabel" />
+        <result column="assetdesc" property="assetdesc" />
+        <result column="assetcategory" property="assetcategory" />
+        <result column="assetStatus" property="assetStatus" />
+        <result column="registerTime" property="registerTime" />
+        <result column="lastUpdatedTime" property="lastUpdatedTime" />
+        <result column="belongOrg" property="belongOrg" />
+        <result column="assetUser" property="assetUser" />
+        <result column="ip" property="ip" />
+    </resultMap>
+
+</mapper>
